@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15×15 온라인 오목</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>15×15 오목</h1>
+
+    <!-- 1. 홈 -->
+    <section id="homeView" class="view">
+      <div class="card home">
+        <label class="field">
+          <span>닉네임</span>
+          <input id="nickname" maxlength="12" placeholder="1~12자" autocomplete="off" />
+        </label>
+        <button id="goOnline" class="action">온라인 대전</button>
+        <button id="goAi" class="action secondary">컴퓨터와 대전</button>
+      </div>
+    </section>
+
+    <!-- 2. 로비 -->
+    <section id="lobbyView" class="view" hidden>
+      <div class="card lobby">
+        <div class="lobby-head">
+          <h2>방 목록</h2>
+          <span id="lobbyNick" class="muted"></span>
+        </div>
+        <form id="createForm" class="create">
+          <input id="roomName" maxlength="20" placeholder="방 이름 (1~20자)" autocomplete="off" />
+          <button class="action" type="submit">방 만들기</button>
+        </form>
+        <ul id="roomList" class="room-list"></ul>
+        <p id="roomEmpty" class="empty">대기 중인 방이 없습니다. 방을 만들어 보세요!</p>
+        <button id="lobbyBack" class="action secondary">처음으로</button>
+      </div>
+    </section>
+
+    <!-- 3. 게임 -->
+    <section id="gameView" class="view layout" hidden>
+      <div class="card">
+        <div class="wood">
+          <div id="board" class="board"></div>
+          <div id="result" class="result" hidden>
+            <strong id="resultText"></strong>
+            <small>화면을 누르면 판을 볼 수 있어요</small>
+          </div>
+        </div>
+        <div class="legend">● 흑돌 먼저 &nbsp;·&nbsp; 가로·세로·대각선 5개 연결 시 승리</div>
+      </div>
+
+      <aside class="card side">
+        <h2 id="gameTitle"></h2>
+
+        <div class="players">
+          <div class="player" data-color="1">
+            <span class="mini black"></span>
+            <span class="pname" id="blackName">-</span>
+            <span class="tag" id="blackTag"></span>
+          </div>
+          <div class="player" data-color="2">
+            <span class="mini white"></span>
+            <span class="pname" id="whiteName">-</span>
+            <span class="tag" id="whiteTag"></span>
+          </div>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <!-- 온라인 전용 -->
+        <div id="onlineControls">
+          <button id="rematch" class="action">재대결 요청</button>
+          <button id="resign" class="action secondary">기권</button>
+          <button id="leave" class="action secondary">방 나가기</button>
+        </div>
+
+        <!-- AI 전용 -->
+        <div id="aiControls">
+          <div class="levels">
+            <button data-level="easy">하수</button>
+            <button data-level="normal" class="on">중수</button>
+            <button data-level="hard">고수</button>
+          </div>
+          <button id="aiStart" class="action">게임 시작</button>
+          <button id="aiHome" class="action secondary">처음으로</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
